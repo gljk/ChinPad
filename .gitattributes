@@ -1,0 +1,7 @@
+* text=auto
+*.cs text
+*.md text
+*.json text
+*.ps1 text
+*.iss text
+*.png binary

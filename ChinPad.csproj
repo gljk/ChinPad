@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    ChinPad: chin-driven touchpad cursor for Windows 11.
+    Phase 1: diagnostic modes (diag and caps). Phase 2: background mode (tray icon, cursor control).
+    Phase 3: button zones (the chin clicks by pressing the clickpad), click suppression, start at login.
+    Phase 4a: settings window, diagnostic bundle, merging of split contacts, settings in %LOCALAPPDATA% unless portable.
+    0.5.0: defaults strategy 3 / zoneMode position, touchpad choice with hot-plug, ClickLock, double-click blocking, "?" help.
+    0.6.0: English / Serbian Latin dictionaries and a live language switch.
+    0.7.0: first-time setup. 0.8.0: public release packaging, command-line helpers and About.
+    One project, no NuGet packages, no network code, runs without elevation (default asInvoker manifest).
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RootNamespace>ChinPad</RootNamespace>
+    <AssemblyName>ChinPad</AssemblyName>
+    <Version>0.8.0</Version>
+    <Company>Marko Galjak</Company>
+    <Product>ChinPad</Product>
+    <Copyright>Copyright 2026 Marko Galjak</Copyright>
+
+    <!-- Publish: one self-contained win-x64 exe. No trimming: WinForms and System.Text.Json reflection need the full framework. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <PublishTrimmed>false</PublishTrimmed>
+    <!-- Bundle only the English framework resources. -->
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- README.md next to the exe (not inside the single-file bundle): the tray menu's "Open README" opens it. -->
+    <None Update="LICENSE;CHANGELOG.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Update="README.md" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+</Project>
